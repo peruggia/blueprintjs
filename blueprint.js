@@ -26,6 +26,9 @@
                     return value.call(this);
                 }
                 return value;
+            },
+            set: function (propertyName, propertyValue) {
+                this.extendedProperties[propertyName] = propertyValue;
             }
         };
 

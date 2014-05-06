@@ -19,6 +19,10 @@ var user = new User(simpleAlreadyExistingObject);
 // Use the get() method to get properties
 console.log(user.get("fullName"));
 
+user.set("lastName", "Downey Jr.");
+
+console.log(user.get("fullName"));
+
 // List of generic objects
 var listOfObjects = [
     {name:"John", lastName: "Blue"},
