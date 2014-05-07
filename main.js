@@ -32,6 +32,10 @@ var listOfObjects = [
     {name:"Agatha", lastName: "Orange"}
 ];
 
+var listOfUsers = blueprint.cast(User, listOfObjects);
+
+console.log(listOfUsers);
+
 // Create the <li> tags based on the listOfObjects
 (function (){
     "use strict";

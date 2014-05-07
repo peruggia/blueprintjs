@@ -2,7 +2,7 @@
 (function () {
     "use strict";
 
-    window.blueprint = function (properties) {
+    var blueprint = function (properties) {
         var initialProperties;
 
         if (typeof properties === "object" &&
@@ -14,11 +14,11 @@
             );
         }
 
-        var blueprintCreator = function (extraProperties) {
+        var blueprintObject = function (extraProperties) {
             this.extendedProperties = extraProperties || {};
         };
 
-        blueprintCreator.prototype = {
+        blueprintObject.prototype = {
             get: function (propertyName) {
                 var value = this.extendedProperties[propertyName] ||
                 initialProperties[propertyName];
@@ -32,6 +32,24 @@
             }
         };
 
-        return blueprintCreator;
+        return blueprintObject;
     };
+
+    // Blueprint Utilities
+    blueprint.cast = function (Blueprint, objectOrArray) {
+        var i, total, listOfObjects;
+        if (objectOrArray instanceof Array) {
+            total = objectOrArray.length;
+            listOfObjects = [];
+            for (i = 0; i < total; i += 1) {
+                listOfObjects.push(new Blueprint(objectOrArray[i]));
+            }
+            return listOfObjects;
+        } else if (objectOrArray instanceof Object) {
+            return new Blueprint(objectOrArray);
+        }
+        return null;
+    };
+
+    window.blueprint = blueprint;
 }());
