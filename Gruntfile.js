@@ -7,7 +7,7 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: true
             },
-            all: ["Gruntfile.js", "blueprint.js", "main.js"]
+            all: ["Gruntfile.js", "blueprint.js", "main.js", "node.js"]
         },
         uglify: {
             options: {

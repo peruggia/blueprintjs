@@ -1,5 +1,17 @@
-/* global window */
-(function () {
+/* global window, module, define */
+(function (blueprint) {
+    "use strict";
+    if (typeof module !== "undefined" &&
+        typeof module.exports !== "undefined") {
+        module.exports = blueprint();
+    } else if (typeof define === "function" && define.amd) {
+        define([], function() {
+            return blueprint();
+        });
+    } else {
+        window.blueprint = blueprint();
+    }
+}(function () {
     "use strict";
 
     // Internal Utilities
@@ -59,5 +71,5 @@
         return null;
     };
 
-    window.blueprint = blueprint;
-}());
+    return blueprint;
+}));

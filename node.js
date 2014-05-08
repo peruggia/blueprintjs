@@ -1,4 +1,5 @@
-/* global blueprint, console, document */
+/* global console, require */
+var blueprint = require("./blueprint");
 
 // Simple "Class"
 var User = blueprint({
@@ -53,21 +54,3 @@ var listOfObjects = [
 var listOfUsers = blueprint.cast(User, listOfObjects);
 
 console.log(listOfUsers);
-
-// Create the <li> tags based on the listOfObjects
-(function (){
-    "use strict";
-    var listDOM = document.getElementById("list");
-    var i = 0;
-    var total = listOfObjects.length;
-    var currentUser;
-    var text;
-    var li;
-    for (i; i < total; i += 1) {
-        li = document.createElement("li");
-        currentUser = new User(listOfObjects[i]);
-        text = document.createTextNode(currentUser.get("fullName"));
-        li.appendChild(text);
-        listDOM.appendChild(li);
-    }
-}());
