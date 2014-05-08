@@ -10,14 +10,34 @@ var User = blueprint({
     }
 });
 
+var Car = blueprint({
+    isExpensive: (function (){
+        "use strict";
+        var expensiveBrands = {
+            bmw: true,
+            mercedez: true
+        };
+        return function (brand, other) {
+            console.log(brand);
+            console.log(other);
+            if (expensiveBrands[this.get("brand")]) {
+                return true;
+            }
+            return false;
+        };
+    }())
+});
+
 // Simple generic object
 var simpleAlreadyExistingObject = {name: "Robert", lastName: "Baratheon"};
 
 // Transforms it into a User object
 var user = new User(simpleAlreadyExistingObject);
+var car = new Car({brand:"bmw"});
 
 // Use the get() method to get properties
 console.log(user.get("fullName"));
+console.log("Is the car expensive? " + car.get("isExpensive"));
 
 user.set("lastName", "Downey Jr.");
 

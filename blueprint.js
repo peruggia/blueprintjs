@@ -2,6 +2,13 @@
 (function () {
     "use strict";
 
+    // Internal Utilities
+    var utils = {
+        sliceArguments: function (args) {
+            return Array.prototype.slice.call(args, 1);
+        }
+    };
+
     var blueprint = function (properties) {
         var initialProperties;
 
@@ -20,10 +27,11 @@
 
         blueprintObject.prototype = {
             get: function (propertyName) {
+                var args = utils.sliceArguments(arguments);
                 var value = this.extendedProperties[propertyName] ||
                 initialProperties[propertyName];
                 if (typeof value === "function") {
-                    return value.call(this);
+                    return value.apply(this, args);
                 }
                 return value;
             },
