@@ -7,7 +7,12 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: true
             },
-            all: ["Gruntfile.js", "blueprint.js", "main.js", "node.js"]
+            all: [
+                "Gruntfile.js",
+                "src/blueprint.js",
+                "demo/main.js",
+                "demo/node.js"
+            ]
         },
         uglify: {
             options: {
@@ -16,13 +21,18 @@ module.exports = function (grunt) {
                 compress: true
             },
             all: {
-                src: "blueprint.js",
-                dest: "blueprint.min.js"
+                src: "src/blueprint.js",
+                dest: "build/blueprint.min.js"
             }
         },
         watch: {
             js: {
-                files: ["Gruntfile.js", "blueprint.js", "main.js"],
+                files: [
+                    "Gruntfile.js",
+                    "src/blueprint.js",
+                    "demo/main.js",
+                    "demo/node.js"
+                ],
                 tasks: ["default"]
             }
         }

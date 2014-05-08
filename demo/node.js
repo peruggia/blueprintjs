@@ -1,5 +1,5 @@
 /* global console, require */
-var blueprint = require("./blueprint");
+var blueprint = require("../src/blueprint");
 
 // Simple "Class"
 var User = blueprint({
