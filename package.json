@@ -1,7 +1,7 @@
 {
   "name": "blueprintjs",
-  "version": "0.0.1",
-  "description": "Transform genetic objects into a specific class object",
+  "version": "0.0.2",
+  "description": "Treat generic objects with \"class\"",
   "main": "src/blueprint.js",
   "scripts": {
     "test": "grunt test"
