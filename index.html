@@ -56,6 +56,10 @@
 
 <span class="c1">// Now you get the "fullName" method for free!</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"fullName"</span><span class="p">));</span> <span class="c1">// Robert Baratheon</span>
+
+<span class="nx">user</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"lastName"</span><span class="p">,</span> <span class="s2">"Downey Jr."</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"fullName"</span><span class="p">));</span> <span class="c1">// Robert Downey Jr.</span>
 </pre></div>
 
 <h3>
@@ -76,7 +80,7 @@
 </pre></div>
 
 <h3>
-<a name="the-special-init-method" class="anchor" href="#the-special-init-method"><span class="octicon octicon-link"></span></a>The special <strong>init</strong> method</h3>
+<a name="the-special-init-method" class="anchor" href="#the-special-init-method"><span class="octicon octicon-link"></span></a>The special <code>init</code> method</h3>
 
 <div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">Car</span> <span class="o">=</span> <span class="nx">blueprint</span><span class="p">({</span>
     <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
