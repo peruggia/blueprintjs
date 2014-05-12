@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>BlueprintJS by peruggia</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>BlueprintJS</h1>
+        <h2>Generic objects with class</h2>
+        <a href="https://github.com/peruggia/blueprintjs" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a name="what-does-it-do" class="anchor" href="#what-does-it-do"><span class="octicon octicon-link"></span></a>What does it do?</h3>
+
+<p>If you work with a lot of generic objects (<code>{}</code>) in your code and you want to give special behavior to some or all of them, so BlueprintJS is the right tool for you.</p>
+
+<h3>
+<a name="creating-a-blueprint" class="anchor" href="#creating-a-blueprint"><span class="octicon octicon-link"></span></a>Creating a Blueprint</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">blueprint</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="nx">lastName</span><span class="o">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="nx">fullName</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="s2">"use strict"</span><span class="p">;</span>
+        <span class="c1">// Never use this.name, always use the "get" and "set" methods</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"lastName"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="using-the-user-blueprint" class="anchor" href="#using-the-user-blueprint"><span class="octicon octicon-link"></span></a>Using the <code>User</code> Blueprint</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">someObjectIHaveInMyProject</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">"Robert"</span><span class="p">,</span> <span class="nx">lastName</span><span class="o">:</span> <span class="s2">"Baratheon"</span><span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">someObjectIHaveInMyProject</span><span class="p">);</span>
+
+<span class="c1">// Now you get the "fullName" method for free!</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"fullName"</span><span class="p">));</span> <span class="c1">// Robert Baratheon</span>
+</pre></div>
+
+<h3>
+<a name="casting-a-list-of-objects" class="anchor" href="#casting-a-list-of-objects"><span class="octicon octicon-link"></span></a>Casting a list of objects</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">listOfObjects</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">"John"</span><span class="p">,</span> <span class="nx">lastName</span><span class="o">:</span> <span class="s2">"Blue"</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">"Mary"</span><span class="p">,</span> <span class="nx">lastName</span><span class="o">:</span> <span class="s2">"Red"</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">"Richard"</span><span class="p">,</span> <span class="nx">lastName</span><span class="o">:</span> <span class="s2">"Green"</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">"Michael"</span><span class="p">,</span> <span class="nx">lastName</span><span class="o">:</span> <span class="s2">"Gray"</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">"Agatha"</span><span class="p">,</span> <span class="nx">lastName</span><span class="o">:</span> <span class="s2">"Orange"</span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="c1">// blueprint.cast(Blueprint, object_or_list_of_objects)</span>
+<span class="kd">var</span> <span class="nx">listOfUsers</span> <span class="o">=</span> <span class="nx">blueprint</span><span class="p">.</span><span class="nx">cast</span><span class="p">(</span><span class="nx">User</span><span class="p">,</span> <span class="nx">listOfObjects</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">listOfUsers</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">get</span><span class="p">(</span><span class="s2">"fullName"</span><span class="p">));</span> <span class="c1">// Mary Red</span>
+</pre></div>
+
+<h3>
+<a name="the-special-init-method" class="anchor" href="#the-special-init-method"><span class="octicon octicon-link"></span></a>The special <strong>init</strong> method</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">Car</span> <span class="o">=</span> <span class="nx">blueprint</span><span class="p">({</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="s2">"BMW"</span><span class="p">);</span> <span class="c1">// It will replace the default model</span>
+    <span class="p">},</span>
+    <span class="nx">model</span><span class="o">:</span> <span class="s2">"Mercedes Benz"</span>
+<span class="p">});</span>
+
+<span class="c1">// The object is created and the "init()" method is called</span>
+<span class="kd">var</span> <span class="nx">car</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">car</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"model"</span><span class="p">));</span> <span class="c1">// BMW</span>
+</pre></div>
+
+<blockquote>
+<p>That's it. Any feedback will be appreciated.</p>
+</blockquote>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/peruggia/blueprintjs/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/peruggia/blueprintjs/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/peruggia/blueprintjs"></a> is maintained by <a href="https://github.com/peruggia">peruggia</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
