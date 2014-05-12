@@ -54,7 +54,7 @@
 
 <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">(</span><span class="nx">someObjectIHaveInMyProject</span><span class="p">);</span>
 
-<span class="c1">// Now you get the "fullName" method for free!</span>
+<span class="c1">// Now you get the "fullName" method for free. Bargain!</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"fullName"</span><span class="p">));</span> <span class="c1">// Robert Baratheon</span>
 
 <span class="nx">user</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"lastName"</span><span class="p">,</span> <span class="s2">"Downey Jr."</span><span class="p">);</span>
@@ -93,6 +93,38 @@
 <span class="kd">var</span> <span class="nx">car</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">car</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"model"</span><span class="p">));</span> <span class="c1">// BMW</span>
+</pre></div>
+
+<h3>
+<a name="working-with-nodejs" class="anchor" href="#working-with-nodejs"><span class="octicon octicon-link"></span></a>Working with NodeJS</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="c1">// Just require the package and you are set</span>
+<span class="kd">var</span> <span class="nx">blueprint</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"blueprint"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">Car</span> <span class="o">=</span> <span class="nx">blueprint</span><span class="p">({</span>
+    <span class="c1">// Using closure and IIFE to create the isExpensive method</span>
+    <span class="nx">isExpensive</span><span class="o">:</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
+        <span class="s2">"use strict"</span><span class="p">;</span>
+        <span class="c1">// "Static" list of expensive brands</span>
+        <span class="kd">var</span> <span class="nx">expensiveBrands</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">bmw</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">mercedez</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">};</span>
+        <span class="c1">// The function that will be executed when the</span>
+        <span class="c1">// isExpensive method is called</span>
+        <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">expensiveBrands</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"brand"</span><span class="p">)])</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">};</span>
+    <span class="p">}())</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">car</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">({</span><span class="nx">brand</span><span class="o">:</span><span class="s2">"bmw"</span><span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Is the car expensive? "</span> <span class="o">+</span> <span class="nx">car</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"isExpensive"</span><span class="p">));</span>
+<span class="c1">// outputs: Is the car expensive? true</span>
 </pre></div>
 
 <blockquote>
