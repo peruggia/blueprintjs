@@ -1,7 +1,7 @@
 {
   "name": "blueprintjs",
-  "version": "0.0.2",
-  "description": "Treat generic objects with \"class\"",
+  "version": "0.0.3",
+  "description": "Treat generic objects with class",
   "main": "src/blueprint.js",
   "scripts": {
     "test": "grunt test"

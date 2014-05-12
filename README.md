@@ -23,7 +23,7 @@ var someObjectIHaveInMyProject = {name: "Robert", lastName: "Baratheon"};
 
 var user = new User(someObjectIHaveInMyProject);
 
-// Now you get the "fullName" method for free!
+// Now you get the "fullName" method for free. Bargain!
 console.log(user.get("fullName")); // Robert Baratheon
 
 user.set("lastName", "Downey Jr.");
@@ -60,6 +60,37 @@ var Car = blueprint({
 var car = new Car();
 
 console.log(car.get("model")); // BMW
+```
+
+### Working with NodeJS
+```javascript
+// Just require the package and you are set
+var blueprint = require("blueprint");
+
+var Car = blueprint({
+    // Using closure and IIFE to create the isExpensive method
+    isExpensive: (function (){
+        "use strict";
+        // "Static" list of expensive brands
+        var expensiveBrands = {
+            bmw: true,
+            mercedez: true
+        };
+        // The function that will be executed when the
+        // isExpensive method is called
+        return function () {
+            if (expensiveBrands[this.get("brand")]) {
+                return true;
+            }
+            return false;
+        };
+    }())
+});
+
+var car = new Car({brand:"bmw"});
+
+console.log("Is the car expensive? " + car.get("isExpensive"));
+// outputs: Is the car expensive? true
 ```
 
 > That's it. Any feedback will be appreciated.
