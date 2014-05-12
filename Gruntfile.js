@@ -11,7 +11,8 @@ module.exports = function (grunt) {
                 "Gruntfile.js",
                 "src/blueprint.js",
                 "demo/main.js",
-                "demo/node.js"
+                "demo/node.js",
+                "test/*.spec.js"
             ]
         },
         uglify: {
@@ -25,13 +26,22 @@ module.exports = function (grunt) {
                 dest: "build/blueprint.min.js"
             }
         },
+        jasmine: {
+            all: {
+                src: "src/blueprint.js",
+                options: {
+                    specs: "test/blueprint.spec.js"
+                }
+            }
+        },
         watch: {
             js: {
                 files: [
                     "Gruntfile.js",
                     "src/blueprint.js",
                     "demo/main.js",
-                    "demo/node.js"
+                    "demo/node.js",
+                    "test/*.spec.js"
                 ],
                 tasks: ["default"]
             }
@@ -40,10 +50,12 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-jasmine");
     grunt.loadNpmTasks("grunt-contrib-watch");
 
     grunt.registerTask("default", [
         "jshint:all",
+        "jasmine:all",
         "uglify:all"
     ]);
 };

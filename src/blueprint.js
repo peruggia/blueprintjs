@@ -35,6 +35,10 @@
 
         var blueprintObject = function (extraProperties) {
             this.extendedProperties = extraProperties || {};
+            var init = this.get("init");
+            if (typeof init === "function") {
+                init();
+            }
         };
 
         blueprintObject.prototype = {
