@@ -31,6 +31,15 @@ user.set("lastName", "Downey Jr.");
 console.log(user.get("fullName")); // Robert Downey Jr.
 ```
 
+### Transforming the `user` blueprintObject into a plain object
+```javascript
+var userPlainObject = blueprint.toPlainObject(user);
+
+// Note that the fullName method is now a property with a value that is the
+// result of that method
+console.log(user.fullName); // Robert Downey Jr.
+```
+
 ### Casting a list of objects
 ```javascript
 var listOfObjects = [
