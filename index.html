@@ -63,6 +63,16 @@
 </pre></div>
 
 <h3>
+<a name="transforming-the-user-blueprintobject-into-a-plain-object" class="anchor" href="#transforming-the-user-blueprintobject-into-a-plain-object"><span class="octicon octicon-link"></span></a>Transforming the <code>user</code> blueprintObject into a plain object</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">userPlainObject</span> <span class="o">=</span> <span class="nx">blueprint</span><span class="p">.</span><span class="nx">toPlainObject</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+
+<span class="c1">// Note that the fullName method is now a property with a value that is the</span>
+<span class="c1">// result of that method</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">fullName</span><span class="p">);</span> <span class="c1">// Robert Downey Jr.</span>
+</pre></div>
+
+<h3>
 <a name="casting-a-list-of-objects" class="anchor" href="#casting-a-list-of-objects"><span class="octicon octicon-link"></span></a>Casting a list of objects</h3>
 
 <div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">listOfObjects</span> <span class="o">=</span> <span class="p">[</span>
