@@ -41,6 +41,9 @@ user.set("lastName", "Downey Jr.");
 
 console.log(user.get("fullName"));
 
+var plainObject = blueprint.toPlainObject(user);
+console.log(plainObject);
+
 // List of generic objects
 var listOfObjects = [
     {name:"John", lastName: "Blue"},

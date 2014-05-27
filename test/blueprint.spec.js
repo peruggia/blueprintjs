@@ -73,4 +73,17 @@ describe("Blueprint tests", function () {
         });
         expect(user.get("name")).toBe("Marcus");
     });
+    it("Should build the plain object from a Blueprint", function () {
+        var User = blueprint({
+            name: "",
+            lastName: "",
+            fullName: function () {
+                return this.get("name") + " " + this.get("lastName");
+            }
+        });
+        var custom = {name: "James", lastName: "Cameron"};
+        var user = new User(custom);
+        var plainUser = blueprint.toPlainObject(user);
+        expect(plainUser.fullName).toBe("James Cameron");
+    });
 });

@@ -53,6 +53,28 @@
             },
             set: function (propertyName, propertyValue) {
                 this.extendedProperties[propertyName] = propertyValue;
+            },
+            getProperties: function () {
+                var properties = [];
+                var existingProperties = {};
+                var key;
+                for (key in initialProperties) {
+                    if (initialProperties.hasOwnProperty(key)) {
+                        if (! existingProperties[key]) {
+                            existingProperties[key] = true;
+                            properties.push(key);
+                        }
+                    }
+                }
+                for (key in this.extendedProperties) {
+                    if (this.extendedProperties.hasOwnProperty(key)) {
+                        if (! existingProperties[key]) {
+                            existingProperties[key] = true;
+                            properties.push(key);
+                        }
+                    }
+                }
+                return properties;
             }
         };
 
@@ -73,6 +95,21 @@
             return new Blueprint(objectOrArray);
         }
         return null;
+    };
+
+    blueprint.toPlainObject = function (blueprintObject) {
+        var plainObject = {};
+        var properties;
+        var i;
+        var total;
+        if (blueprintObject && typeof blueprintObject === "object") {
+            properties = blueprintObject.getProperties();
+            total = properties.length;
+            for (i = 0; i < total; i += 1) {
+                plainObject[properties[i]] = blueprintObject.get(properties[i]);
+            }
+        }
+        return plainObject;
     };
 
     return blueprint;
