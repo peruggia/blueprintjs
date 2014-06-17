@@ -1,6 +1,6 @@
 {
   "name": "blueprintjs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Treat generic objects with class",
   "main": "src/blueprint.js",
   "scripts": {
