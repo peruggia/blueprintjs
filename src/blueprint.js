@@ -22,19 +22,16 @@
     };
 
     var blueprint = function (properties) {
-        var initialProperties;
-
-        if (typeof properties === "object" &&
-            properties instanceof Object) {
-            initialProperties = properties;
-        } else {
+        if (typeof properties !== "object" ||
+            ! properties instanceof Object) {
             throw new Error(
                 "To make a Class an Object with its properties is required"
             );
         }
 
         var blueprintObject = function (extraProperties) {
-            this.extendedProperties = extraProperties || {};
+            this.properties = properties || {};
+            this.originalObject = extraProperties || {};
             var init = this.get("init");
             if (typeof init === "function") {
                 init();
@@ -44,30 +41,34 @@
         blueprintObject.prototype = {
             get: function (propertyName) {
                 var args = utils.sliceArguments(arguments);
-                var value = this.extendedProperties[propertyName] ||
-                initialProperties[propertyName];
+                var value;
+                if (this.originalObject.hasOwnProperty(propertyName)) {
+                    value = this.originalObject[propertyName];
+                } else if (this.properties.hasOwnProperty(propertyName)) {
+                    value = this.properties[propertyName];
+                }
                 if (typeof value === "function") {
                     return value.apply(this, args);
                 }
                 return value;
             },
             set: function (propertyName, propertyValue) {
-                this.extendedProperties[propertyName] = propertyValue;
+                this.originalObject[propertyName] = propertyValue;
             },
             getProperties: function () {
                 var properties = [];
                 var existingProperties = {};
                 var key;
-                for (key in initialProperties) {
-                    if (initialProperties.hasOwnProperty(key)) {
+                for (key in this.properties) {
+                    if (this.properties.hasOwnProperty(key)) {
                         if (! existingProperties[key]) {
                             existingProperties[key] = true;
                             properties.push(key);
                         }
                     }
                 }
-                for (key in this.extendedProperties) {
-                    if (this.extendedProperties.hasOwnProperty(key)) {
+                for (key in this.originalObject) {
+                    if (this.originalObject.hasOwnProperty(key)) {
                         if (! existingProperties[key]) {
                             existingProperties[key] = true;
                             properties.push(key);
