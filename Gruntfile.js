@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 preserveComments: "some",
-                mangle: true,
+                mangle: false,
                 compress: true
             },
             all: {
